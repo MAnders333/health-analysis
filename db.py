@@ -83,8 +83,56 @@ class Database:
         self.conn.commit()
 
     def delete_row(self, table_name=None, condition=None):
-        pass
-    # method that deletes line in existing db and table
+        """Deletes specified row of data in specified table.
+
+        :param table_name: name of the table of which data is to be deleted
+        :param condition: SQL conditional WHERE statement
+        :type table_name: string
+        :type condition: string
+        """
+        # checks whether table_name is valid
+        if not isinstance(table_name, str) and table_name not in self.table_names:
+            raise AttributeError('Table name invalid. Try again.')
+
+        # checks whether condition is valid
+        if not isinstance(condition, str):
+            raise AttributeError('The condition must be string format.')
+        
+        # tries to delete specified row
+        try:
+            self.c.execute(f'DELETE from {table_name} where {condition}')
+            print(f"""Data successfully deleted from {table_name} where {condition}.""")
+        except Exception as e:
+            print(e)
+        
+        # saves changes
+        self.conn.commit()
+
+    def update_row(self, table_name=None, row_id=None, data=None):
+        """Updates row by row ID of specified table.
+
+        :param table_name: name of the table of which a row is to be updated
+        :param row_id: id of the row to be updated
+        :param data:
+        :type table_name: string
+        :type row_id: string
+        :type data: 
+        """
+
+        # checks whether table_name is valid
+        if not isinstance(table_name, str) and table_name not in self.table_names:
+            raise AttributeError('Table name invalid. Try again.')
+
+        # checks whether row_id is valid
+        if not isinstance(row_id, str):
+            raise AttributeError('Row ID invalid. Try again.')
+
+        # tries to update row by row ID
+        try:
+            cursor = self.c.execute(f"""SELECT * FROM {table_name}""")
+            table_headers = [description[0] for description in cursor.description]
+            for loop
+            self.c.execute(f"""UPDATE {table_name} """)
 
     # method that edits line in existing db and table
 
