@@ -255,27 +255,7 @@ class Database:
 
 
 if __name__ == "__main__":
-
-    path = '/Users/marcanders/Desktop/Projects/Programming/HealthAnalysis/'
-    db_name = 'HealthDB.db'
-
-    health_db = Database(path=path, db_name=db_name)
-    print(health_db.table_names)
-    column_names = [
-        ('column1', 'TEXT'),
-        ('column2', 'real')
-    ]
-    health_db.create_table('table1', column_names)
-    data = [
-        ('text', 2.0),
-        ('right', 1)
-    ]
-    print(health_db.column_names_of_table('table1'))
-    health_db.add_rows('table1', data)
-    health_db.update_rows('table1', "column1='test'", "column2=2.0")
-    data = health_db.fetch_data('table1')
-    print(data)
-    health_db.conn.close()
+    pass
 
 
 
